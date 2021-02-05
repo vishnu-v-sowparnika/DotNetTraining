@@ -176,3 +176,4 @@ E:\Hobby Project\DotSamples\HelloWorld1\MvcMovie\obj\Debug\netcoreapp3.1\Razor\V
 E:\Hobby Project\DotSamples\HelloWorld1\MvcMovie\obj\Debug\netcoreapp3.1\Razor\Views\Movies\Index.cshtml.g.cs
 E:\Hobby Project\DotSamples\HelloWorld1\MvcMovie\obj\Debug\netcoreapp3.1\Razor\Views\Products\Create.cshtml.g.cs
 E:\Hobby Project\DotSamples\HelloWorld1\MvcMovie\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\MvcMovie\obj\Debug\netcoreapp3.1\Razor\Views\ProductType\Index.cshtml.g.cs
