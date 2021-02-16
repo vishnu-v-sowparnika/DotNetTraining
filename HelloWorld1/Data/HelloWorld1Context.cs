@@ -15,5 +15,6 @@ namespace HelloWorld1.Data
         }
 
         public DbSet<HelloWorld1.Models.Movie> Movie { get; set; }
+        public DbSet<Address> Address { get; set; }
     }
 }

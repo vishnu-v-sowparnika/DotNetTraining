@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld1", "HelloWorld1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcMovie", "MvcMovie\MvcMovie.csproj", "{6A99900E-EF85-4D2D-A5DD-DBABA388E063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventManagement", "EventManagement\EventManagement.csproj", "{E9EFC9AC-956A-402D-97EC-7E52167A5CCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement", "EventManagement\EventManagement.csproj", "{E9EFC9AC-956A-402D-97EC-7E52167A5CCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

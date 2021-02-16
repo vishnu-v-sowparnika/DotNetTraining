@@ -56,7 +56,12 @@ namespace MvcMovie.Migrations
                     b.Property<float>("price")
                         .HasColumnType("real");
 
+                    b.Property<int?>("productTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("productTypeId");
 
                     b.ToTable("Product");
                 });
@@ -74,6 +79,13 @@ namespace MvcMovie.Migrations
                     b.HasKey("id");
 
                     b.ToTable("ProductType");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.Product", b =>
+                {
+                    b.HasOne("MvcMovie.Models.ProductType", "productType")
+                        .WithMany("Products")
+                        .HasForeignKey("productTypeId");
                 });
 #pragma warning restore 612, 618
         }
