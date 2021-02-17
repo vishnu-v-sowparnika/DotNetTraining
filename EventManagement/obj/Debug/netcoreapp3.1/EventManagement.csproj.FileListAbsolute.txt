@@ -177,4 +177,7 @@ E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\
 E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\EventManagement.genruntimeconfig.cache
 E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Organiser\Index.cshtml.g.cs
 E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\EventManagement.csprojAssemblyReference.cache
+<<<<<<< HEAD
 E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Organiser\Edit.cshtml.g.cs
+=======
+>>>>>>> ce44e425d9f4a9810cd1e605920d702d2e68ba0d

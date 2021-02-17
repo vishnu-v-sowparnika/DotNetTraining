@@ -27,6 +27,7 @@ namespace EventManagement
         {
             services.AddControllersWithViews();
             services.AddLogging();
+            services.AddSession();
             services.AddDbContext<EventManagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EventManagementContext")));
         }
 
@@ -48,6 +49,7 @@ namespace EventManagement
 
             app.UseRouting();
 
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

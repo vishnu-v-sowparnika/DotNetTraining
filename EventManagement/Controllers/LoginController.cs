@@ -1,4 +1,5 @@
 ﻿using EventManagement.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,7 @@ namespace EventManagement.Controllers
 
             if (_result != null)
             {
+                HttpContext.Session.SetInt32("userId", _result.Id);
                 return View("Views/Organiser/Index.cshtml", await _context.EventModels.Where(x=>x.organiserId==1).ToListAsync());
             }
             else

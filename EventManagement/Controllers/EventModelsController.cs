@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventManagement.Data;
 using EventManagement.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EventManagement.Controllers
 {
@@ -58,6 +59,7 @@ namespace EventManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                eventModel.organiserId = HttpContext.Session.GetInt32("userId");
                 _context.Add(eventModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
