@@ -16,8 +16,10 @@
         <div id="formContent">
             <!-- Tabs Titles -->
             <h2 class="active"> Sign In </h2>
-            <h2 class="inactive underlineHover"><a asp-controller="Organiser"
-   asp-action="Index">Sign Up</a> </h2>
+            <h2 class="inactive underlineHover">
+                <a asp-controller="Organiser"
+                   asp-action="Create">Sign Up</a>
+            </h2>
 
             <!-- Icon -->
             <div class="fadeIn first">
@@ -25,11 +27,16 @@
             </div>
 
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+            <form method="post" asp-controller="Login" asp-action="Login">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="login">
+                <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
+
+            @if (@ViewBag.Error != null)
+            {
+        <span class="label label-danger">@ViewBag.Error</span>
+            }
 
             <!-- Remind Passowrd -->
             <div id="formFooter">

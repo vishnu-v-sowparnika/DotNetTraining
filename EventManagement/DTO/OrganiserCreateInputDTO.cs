@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EventManagement.Models
+namespace EventManagement.DTO
 {
-    public class Organiser
+    public class OrganiserCreateInputDTO
     {
-        public virtual int Id { get; set; }
+
+       
 
         [Required]
         [EmailAddress]
@@ -21,10 +21,15 @@ namespace EventManagement.Models
         public virtual string FName { get; set; }
         public virtual string LName { get; set; }
 
-        [ForeignKey("AddressId")]
-        public virtual int AddressId { get; set; }
-        public virtual Address Address { get; set; }
+        public virtual string Address1 { get; set; }
 
-       
+        public virtual string Address2 { get; set; }
+
+        public virtual string POBOX { get; set; }
+
+        public virtual string State { get; set; }
+
+        public virtual string City { get; set; }
+
     }
 }
