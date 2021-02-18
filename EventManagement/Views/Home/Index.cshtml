@@ -1,8 +1,61 @@
-﻿@{
+﻿
+@model IEnumerable<EventManagement.Models.EventModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eventdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reg_start_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reg_end_date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eventdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reg_start_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reg_end_date)
+                </td>
+                <td>
+                    
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
