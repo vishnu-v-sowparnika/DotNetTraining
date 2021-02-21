@@ -181,3 +181,10 @@ E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\
 E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Organiser\Edit.cshtml.g.cs
 =======
 >>>>>>> ce44e425d9f4a9810cd1e605920d702d2e68ba0d
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Organiser\Details.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Participants\Create.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Participants\Delete.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Participants\Details.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Participants\Edit.cshtml.g.cs
+E:\Hobby Project\DotSamples\HelloWorld1\EventManagement\obj\Debug\netcoreapp3.1\Razor\Views\Participants\Index.cshtml.g.cs

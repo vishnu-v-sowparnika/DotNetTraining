@@ -28,6 +28,7 @@ namespace EventManagement
             services.AddControllersWithViews();
             services.AddLogging();
             services.AddSession();
+            services.AddHttpContextAccessor();
             services.AddDbContext<EventManagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EventManagementContext")));
         }
 

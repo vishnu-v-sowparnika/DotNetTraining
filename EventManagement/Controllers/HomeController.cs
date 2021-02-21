@@ -24,8 +24,8 @@ namespace EventManagement.Controllers
 
         public async Task< IActionResult> Index()
         {
-           
-            return View(await _context.EventModels.ToListAsync());
+            return View(await _context.EventModels.Include(x=>x.organiser).ToListAsync());
+
         }
 
         public IActionResult Privacy()
@@ -37,6 +37,22 @@ namespace EventManagement.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var eventModel = await _context.EventModels.Include(x=>x.organiser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (eventModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(eventModel);
         }
     }
 }

@@ -8,6 +8,7 @@ using EventManagement.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using EventManagement.DTO;
+using Microsoft.AspNetCore.Http;
 
 namespace EventManagement.Controllers
 {
@@ -22,7 +23,8 @@ namespace EventManagement.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EventModels.ToListAsync());
+            var id = HttpContext.Session.GetInt32("userId");
+            return View(await _context.EventModels.Where(x => x.Id == id).ToListAsync());
            // return View();
         }
 
@@ -33,7 +35,7 @@ namespace EventManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(OrganiserCreateInputDTO organiser)
+        public async Task< IActionResult> Create(OrganiserCreateInputDTO organiser)
         {
             _logger.LogInformation($"Create controller activated {organiser.Email}");
             Address address = new Address()
@@ -57,16 +59,77 @@ namespace EventManagement.Controllers
 
             _context.Organiser.Add(org);
             _context.SaveChanges();
-            return View("Views/Home/Index.cshtml");
+            var result = await _context.EventModels.Include(x => x.organiser).ToListAsync();
+            return View("Views/Home/Index.cshtml", result);
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-
+                id = HttpContext.Session.GetInt32("userId");
             }
-            return View(await _context.EventModels.ToListAsync());
+            var organiser = _context.Organiser.Where(x => x.Id == id).FirstOrDefault();
+            var address = _context.Address.Where(x => x.Id == organiser.AddressId).FirstOrDefault();
+            OrganiserEditDTO dto = new OrganiserEditDTO()
+            {
+                Id =organiser.Id,
+                Email=organiser.Email,
+                Password=organiser.Password,
+                FName=organiser.FName,
+                LName=organiser.LName,
+                Address1=address.Address1,
+                Address2=address.Address2,
+                City=address.City,
+                State=address.State,
+                POBOX=address.POBOX
+            };
+            return View(dto);
+            // return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(OrganiserEditDTO dto)
+        {
+            int id = dto.Id;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Organiser organiser = dto.GetOrganiser();
+                    var addressId = _context.Organiser.AsNoTracking().Where(x=>x.Id==dto.Id).FirstOrDefault().AddressId;
+                    Address add = dto.GetAddress();
+                    add.Id = addressId;
+                    organiser.Address = add;
+                    //_context.Update(add);
+                    //await _context.SaveChangesAsync();
+                    _context.Update(organiser);
+                    await _context.SaveChangesAsync();
+                    
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            var model = await _context.Organiser.Include(x => x.Address).Where(x => x.Id == id).FirstOrDefaultAsync();
+            return View("Details",model);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                //return NotFound();
+                id = HttpContext.Session.GetInt32("userId");
+            }
+            else
+            {
+                id = HttpContext.Session.GetInt32("userId");
+            }
+            var model = await _context.Organiser.Include(x => x.Address).Where(x => x.Id == id).FirstOrDefaultAsync();
+            return View(model);
             // return View();
         }
     }

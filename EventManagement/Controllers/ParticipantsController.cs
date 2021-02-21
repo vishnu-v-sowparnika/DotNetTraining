@@ -7,26 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventManagement.Data;
 using EventManagement.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace EventManagement.Controllers
 {
-    public class EventModelsController : Controller
+    public class ParticipantsController : Controller
     {
         private readonly EventManagementContext _context;
 
-        public EventModelsController(EventManagementContext context)
+        public ParticipantsController(EventManagementContext context)
         {
             _context = context;
         }
 
-        // GET: EventModels
+        // GET: Participants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EventModels.Include(x=>x.organiser).ToListAsync());
+            var eventManagementContext = _context.Participants.Include(p => p.EventModel);
+            return View(await eventManagementContext.ToListAsync());
         }
 
-        // GET: EventModels/Details/5
+        // GET: Participants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,40 +34,42 @@ namespace EventManagement.Controllers
                 return NotFound();
             }
 
-            var eventModel = await _context.EventModels.Include(x=>x.organiser)
+            var participant = await _context.Participants
+                .Include(p => p.EventModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (eventModel == null)
+            if (participant == null)
             {
                 return NotFound();
             }
 
-            return View(eventModel);
+            return View(participant);
         }
 
-        // GET: EventModels/Create
+        // GET: Participants/Create
         public IActionResult Create()
         {
+            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Description") ;
             return View();
         }
 
-        // POST: EventModels/Create
+        // POST: Participants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,Eventdate,Venue,Reg_start_date,Reg_end_date")] EventModel eventModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone,EventModelId")] Participant participant)
         {
             if (ModelState.IsValid)
             {
-                eventModel.organiserId = HttpContext.Session.GetInt32("userId");
-                _context.Add(eventModel);
+                _context.Add(participant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(eventModel);
+            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Id", participant.EventModelId);
+            return View(participant);
         }
 
-        // GET: EventModels/Edit/5
+        // GET: Participants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +77,23 @@ namespace EventManagement.Controllers
                 return NotFound();
             }
 
-            var eventModel = await _context.EventModels.FindAsync(id);
-            if (eventModel == null)
+            var participant = await _context.Participants.FindAsync(id);
+            if (participant == null)
             {
                 return NotFound();
             }
-            return View(eventModel);
+            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Id", participant.EventModelId);
+            return View(participant);
         }
 
-        // POST: EventModels/Edit/5
+        // POST: Participants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Eventdate,Venue,Reg_start_date,Reg_end_date")] EventModel eventModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Phone,EventModelId")] Participant participant)
         {
-            if (id != eventModel.Id)
+            if (id != participant.Id)
             {
                 return NotFound();
             }
@@ -99,12 +102,12 @@ namespace EventManagement.Controllers
             {
                 try
                 {
-                    _context.Update(eventModel);
+                    _context.Update(participant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventModelExists(eventModel.Id))
+                    if (!ParticipantExists(participant.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +118,11 @@ namespace EventManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(eventModel);
+            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Id", participant.EventModelId);
+            return View(participant);
         }
 
-        // GET: EventModels/Delete/5
+        // GET: Participants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +130,31 @@ namespace EventManagement.Controllers
                 return NotFound();
             }
 
-            var eventModel = await _context.EventModels
+            var participant = await _context.Participants
+                .Include(p => p.EventModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (eventModel == null)
+            if (participant == null)
             {
                 return NotFound();
             }
 
-            return View(eventModel);
+            return View(participant);
         }
 
-        // POST: EventModels/Delete/5
+        // POST: Participants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var eventModel = await _context.EventModels.FindAsync(id);
-            _context.EventModels.Remove(eventModel);
+            var participant = await _context.Participants.FindAsync(id);
+            _context.Participants.Remove(participant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EventModelExists(int id)
+        private bool ParticipantExists(int id)
         {
-            return _context.EventModels.Any(e => e.Id == id);
+            return _context.Participants.Any(e => e.Id == id);
         }
     }
 }

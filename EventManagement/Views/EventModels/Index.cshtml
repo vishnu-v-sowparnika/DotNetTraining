@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Reg_end_date)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.organiser)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,6 +50,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Reg_end_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.organiser.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

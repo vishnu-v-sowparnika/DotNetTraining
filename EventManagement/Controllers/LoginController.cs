@@ -33,7 +33,8 @@ namespace EventManagement.Controllers
             if (_result != null)
             {
                 HttpContext.Session.SetInt32("userId", _result.Id);
-                return View("Views/Organiser/Index.cshtml", await _context.EventModels.Where(x=>x.organiserId==1).ToListAsync());
+                var id = HttpContext.Session.GetInt32("userId");
+                return View("Views/Organiser/Index.cshtml", await _context.EventModels.Where(x=>x.organiserId==id).ToListAsync());
             }
             else
             {

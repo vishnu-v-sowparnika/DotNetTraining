@@ -4,14 +4,16 @@ using EventManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventManagement.Migrations
 {
     [DbContext(typeof(EventManagementContext))]
-    partial class EventManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20210221143047_AddedParticipants")]
+    partial class AddedParticipants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +157,7 @@ namespace EventManagement.Migrations
             modelBuilder.Entity("EventManagement.Models.Participant", b =>
                 {
                     b.HasOne("EventManagement.Models.EventModel", "EventModel")
-                        .WithMany("participants")
+                        .WithMany()
                         .HasForeignKey("EventModelId");
                 });
 #pragma warning restore 612, 618

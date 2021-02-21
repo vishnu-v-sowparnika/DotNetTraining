@@ -16,5 +16,6 @@ namespace EventManagement.Data
         public DbSet<Organiser> Organiser { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<EventModel> EventModels { get; set; }
+        public DbSet<Participant> Participants { get; set; }
     }
 }
