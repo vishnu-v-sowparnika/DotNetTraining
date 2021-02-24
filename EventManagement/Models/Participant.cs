@@ -10,7 +10,9 @@ namespace EventManagement.Models
 {
     public class Participant
     {
-        public virtual int Id { get; set; }
+        [Key]
+       [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public  int Id { get; set; }
         public virtual string Name { get; set; }
 
         [EmailAddress]

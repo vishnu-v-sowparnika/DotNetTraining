@@ -132,5 +132,13 @@ namespace EventManagement.Controllers
             return View(model);
             // return View();
         }
+
+
+        public async Task<IActionResult> GetRegisteredParticipants()
+        {
+            int? id = HttpContext.Session.GetInt32("userId") ;
+            var participants = _context.EventModels.Where(x => x.organiserId == id).FirstOrDefault().participants;
+            return View("Views/Participants/Index.cshtml",participants);
+        }
     }
 }

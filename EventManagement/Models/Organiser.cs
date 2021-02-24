@@ -18,7 +18,9 @@ namespace EventManagement.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        [Display(Name = "First Name ")]
         public virtual string FName { get; set; }
+        [Display(Name = "Last Name")]
         public virtual string LName { get; set; }
 
         [ForeignKey("AddressId")]

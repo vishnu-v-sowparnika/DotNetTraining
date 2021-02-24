@@ -61,8 +61,19 @@ namespace EventManagement.Controllers
             {
                 eventModel.organiserId = HttpContext.Session.GetInt32("userId");
                 _context.Add(eventModel);
+                var orgId= HttpContext.Session.GetInt32("userId");
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var events= _context.EventModels.FirstOrDefault();
+                if (orgId != null)
+                {
+                     events = _context.EventModels.Where(x => x.organiserId == orgId).FirstOrDefault();
+                }
+                else
+                {
+                    events = _context.EventModels.FirstOrDefault();
+                }
+                
+                return RedirectToAction(nameof(Index),events);
             }
             return View(eventModel);
         }

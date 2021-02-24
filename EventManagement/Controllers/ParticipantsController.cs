@@ -60,12 +60,12 @@ namespace EventManagement.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone,EventModelId")] Participant participant)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 _context.Add(participant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Id", participant.EventModelId);
+            ViewData["EventModelId"] = new SelectList(_context.EventModels, "Id", "Description", participant.EventModelId);
             return View(participant);
         }
 
